@@ -1,0 +1,62 @@
+[
+	{
+		"price": 2.0,
+		"name": "Almond Joy",
+		"SKU": 10000,
+		"location": "A1"
+	},
+	{
+		"price": 3.0,
+		"name": "Butterfinger",
+		"SKU": 10002,
+		"location": "B1"
+	},
+	{
+		"price": 3.0,
+		"name": "Heath",
+		"SKU": 10003,
+		"location": "C1"
+	},
+	{
+		"price": 2.8,
+		"name": "PayDay",
+		"SKU": 10004,
+		"location": "D1"
+	},
+	{
+		"price": 1.2,
+		"name": "3 Musketeers",
+		"SKU": 10005,
+		"location": "E1"
+	},
+	{
+		"price": 2.5,
+		"name": "Crunch",
+		"SKU": 10006,
+		"location": "A2"
+	},
+	{
+		"price": 3.0,
+		"name": "Snickers",
+		"SKU": 10007,
+		"location": "B2"
+	},
+	{
+		"price": 2.1,
+		"name": "100 Grand",
+		"SKU": 10008,
+		"location": "C2"
+	},
+	{
+		"price": 3.1,
+		"name": "Twix",
+		"SKU": 10009,
+		"location": "D2"
+	},
+	{
+		"price": 3.1,
+		"name": "Kit Kat",
+		"SKU": 10010,
+		"location": "E2"
+	}
+]

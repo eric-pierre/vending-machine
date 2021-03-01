@@ -1,0 +1,102 @@
+[
+        {
+            "location": "E1",
+            "quantity": 15,
+            "item": {
+                "name": "3 Musketeers",
+                "value": 1.2,
+                "currency": "USD",
+                "SKU": 10005
+            }
+        },
+        {
+            "location": "A1",
+            "quantity": 15,
+            "item": {
+                "name": "Almond Joy",
+                "value": 2.0,
+                "currency": "USD",
+                "SKU": 10000
+            }
+        },
+        {
+            "location": "B1",
+            "quantity": 15,
+            "item": {
+                "name": "Butterfinger",
+                "value": 3.0,
+                "currency": "USD",
+                "SKU": 10002
+            }
+        },
+        {
+            "location": "E2",
+            "quantity": 15,
+            "item": {
+                "name": "Kit Kat",
+                "value": 3.1,
+                "currency": "USD",
+                "SKU": 10010
+            }
+        },
+        {
+            "location": "C1",
+            "quantity": 15,
+            "item": {
+                "name": "Heath",
+                "value": 3.0,
+                "currency": "USD",
+                "SKU": 10003
+            }
+        },
+        {
+            "location": "D2",
+            "quantity": 15,
+            "item": {
+                "name": "Twix",
+                "value": 3.1,
+                "currency": "USD",
+                "SKU": 10009
+            }
+        },
+        {
+            "location": "B2",
+            "quantity": 15,
+            "item": {
+                "name": "Snickers",
+                "value": 3.0,
+                "currency": "USD",
+                "SKU": 10007
+            }
+        },
+        {
+            "location": "A2",
+            "quantity": 15,
+            "item": {
+                "name": "Crunch",
+                "value": 2.5,
+                "currency": "USD",
+                "SKU": 10006
+            }
+        },
+        {
+            "location": "C2",
+            "quantity": 15,
+            "item": {
+                "name": "100 Grand",
+                "value": 2.1,
+                "currency": "USD",
+                "SKU": 10008
+            }
+        },
+        {
+            "location": "D1",
+            "quantity": 15,
+            "item": {
+                "name": "PayDay",
+                "value": 2.8,
+                "currency": "USD",
+                "SKU": 10004
+            }
+        }
+    ]

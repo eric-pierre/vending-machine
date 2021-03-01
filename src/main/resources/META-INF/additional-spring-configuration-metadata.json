@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "vending.currency",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.currency'"
+  },
+  {
+    "name": "vending.columns",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.columns'"
+  },
+  {
+    "name": "vending.rows",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.rows'"
+  },
+  {
+    "name": "vending.layout.item-count",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.layout.item-count'"
+  },
+  {
+    "name": "vending.layout.rows",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.layout.rows'"
+  },
+  {
+    "name": "vending.layout.columns",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.layout.columns'"
+  },
+  {
+    "name": "vending.denominations",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.denominations'"
+  },
+  {
+    "name": "vending.machine-id",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.machine-id'"
+  },
+  {
+    "name": "vending.inventory-store",
+    "type": "java.lang.String",
+    "description": "A description for 'vending.inventory-store'"
+  }
+]}
