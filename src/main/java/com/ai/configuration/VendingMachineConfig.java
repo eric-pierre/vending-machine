@@ -20,11 +20,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 @Configuration
-public class ApplicationConfig {
+public class VendingMachineConfig {
 
     @Bean
     CurrencyValidator validator(ApplicationProperties props) {
         return new CurrencyValidator(props.getDenominations(), props.getCurrency());
+    }
+
+    @Bean
+    public Inventory inventory(ApplicationProperties props) {
+        return new Inventory(props.getMachineLayout());
+    }
+
+    @Bean
+    public Dispatcher dispatcher() {
+        Logger thelog = LoggerFactory.getLogger(VendingMachine.class);
+        return new LoggingDispatcher(thelog);
     }
 
     @Bean
@@ -44,17 +55,7 @@ public class ApplicationConfig {
     }
 
 
-    @Bean
-    public Inventory inventory(ApplicationProperties props) {
-        return new Inventory(props.getMachineLayout());
-    }
 
-    @Bean
-    public Dispatcher dispatcher() {
-
-        Logger thelog = LoggerFactory.getLogger(VendingMachine.class);
-        return new LoggingDispatcher(thelog);
-    }
 
 
 

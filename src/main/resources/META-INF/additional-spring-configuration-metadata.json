@@ -2,46 +2,37 @@
   {
     "name": "vending.currency",
     "type": "java.lang.String",
-    "description": "A description for 'vending.currency'"
+    "description": "An ISO 4712 Currency code"
   },
-  {
-    "name": "vending.columns",
-    "type": "java.lang.String",
-    "description": "A description for 'vending.columns'"
-  },
-  {
-    "name": "vending.rows",
-    "type": "java.lang.String",
-    "description": "A description for 'vending.rows'"
-  },
+ 
   {
     "name": "vending.layout.item-count",
     "type": "java.lang.String",
-    "description": "A description for 'vending.layout.item-count'"
+    "description": "The maximum number of items in a slot"
   },
   {
     "name": "vending.layout.rows",
     "type": "java.lang.String",
-    "description": "A description for 'vending.layout.rows'"
+    "description": "The number of rows supported by the machine"
   },
   {
     "name": "vending.layout.columns",
     "type": "java.lang.String",
-    "description": "A description for 'vending.layout.columns'"
+    "description": "The number of rows supported by the machine"
   },
   {
     "name": "vending.denominations",
-    "type": "java.lang.String",
-    "description": "A description for 'vending.denominations'"
+    "type": "java.lang.Double[]",
+    "description": "A list of supported currency values"
   },
   {
     "name": "vending.machine-id",
     "type": "java.lang.String",
-    "description": "A description for 'vending.machine-id'"
+    "description": "An identifier for the machine"
   },
   {
     "name": "vending.inventory-store",
     "type": "java.lang.String",
-    "description": "A description for 'vending.inventory-store'"
+    "description": "The classpath location where the test inventory can be loaded"
   }
 ]}
