@@ -16,8 +16,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.ai.configuration.misc.MoneyDeserializer;
 import com.ai.domain.Money;
 import com.ai.domain.MoneyUS;
+import com.ai.messaging.ExceptionPayload;
+import com.ai.messaging.QuantityPayload;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -45,5 +48,20 @@ class TestSerializerTester {
         } catch (IOException e) {
             fail("Exception while testing deserializtion:" + e.getMessage(), e);
         }
+    }
+
+    @Test
+    void serializeExceptionPayload() {
+        String message = "Test Exception" ;
+        JsonNode node = mapper.valueToTree((ExceptionPayload) () -> new Exception(message));
+        assertEquals(message, node.at("/error").asText());
+
+    }
+
+    @Test
+    void serializeQuantityPayload() {
+        JsonNode node = mapper.valueToTree((QuantityPayload) () -> Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE, node.at("/quantity").asInt());
+
     }
 }
