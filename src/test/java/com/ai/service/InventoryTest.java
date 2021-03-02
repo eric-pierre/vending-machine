@@ -14,7 +14,6 @@ import com.ai.domain.MoneyUS;
 import com.ai.exception.InvalidSlotException;
 import com.ai.exception.OutOfStockException;
 import com.ai.exception.SlotOverflowException;
-import com.ai.service.Inventory;
 
 class InventoryTest {
 

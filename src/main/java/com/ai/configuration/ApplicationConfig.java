@@ -6,7 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.ai.configuration.misc.MoneyDeserializer;
+import com.ai.configuration.misc.MoneySerializer;
+import com.ai.configuration.misc.PayloadSerializer;
 import com.ai.domain.Money;
+import com.ai.messaging.Payload;
 import com.ai.service.CurrencyValidator;
 import com.ai.service.Dispatcher;
 import com.ai.service.Inventory;
@@ -30,6 +33,10 @@ public class ApplicationConfig {
 
         SimpleModule module = new SimpleModule();
         module.addDeserializer(Money.class, new MoneyDeserializer(props.getCurrency()));
+        module.addSerializer(Money.class, new MoneySerializer());
+
+        module.addSerializer(Payload.class, new PayloadSerializer());
+
         mapper.setSerializationInclusion(Include.NON_EMPTY);
 
         mapper.registerModule(module);
