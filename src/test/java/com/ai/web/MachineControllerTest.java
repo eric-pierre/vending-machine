@@ -1,8 +1,7 @@
 package com.ai.web;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
-import com.ai.web.MachineControllerTest.InventoryResponse.InventoryItem;
-import com.ai.web.MachineControllerTest.InventoryResponse.InventoryItem.Item;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
-
-import lombok.Getter;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class MachineControllerTest {
@@ -27,99 +21,63 @@ class MachineControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    private JsonNode makeCall(String target) {
+        return restTemplate.getForObject("http://localhost:" + port + target, JsonNode.class);
+    }
+
     @Test
     void testGetInventory() {
-        InventoryResponse node = restTemplate.getForObject("http://localhost:" + port + "/inventory", InventoryResponse.class);
-        node.getData().sort((v1, v2) -> v1.location.compareTo(v2.location));
-        InventoryItem a2 = node.getData().get(1);
-        assertEquals("A2", a2.location);
-        assertEquals("Crunch", a2.getItem().getName());
-        assertEquals("$2.50", a2.getItem().getPrice());
-        assertEquals(10006, a2.getItem().getSku());
+
+        JsonNode results = makeCall("/inventory");
+        for (int i = 0; i < 10; i++) {
+            assertTrue(results.at("/data/" + i + "/location").isTextual());
+            assertTrue(results.at("/data/" + i + "/quantity").isInt());
+            assertTrue(results.at("/data/" + i + "/item/SKU").isInt());
+            assertTrue(results.at("/data/" + i + "/item/price").isTextual());
+            assertTrue(results.at("/data/" + i + "/item/name").isTextual());
+
+        }
+
     }
 
     @Test
     void testInsertBalanceAndCancel() {
         insertThreeDollars();
 
-        MoneyResponse node = restTemplate.getForObject("http://localhost:" + port + "/balance", MoneyResponse.class);
-        assertEquals("$3.00", node.getBalance());
-        node = restTemplate.getForObject("http://localhost:" + port + "/cancel", MoneyResponse.class);
-        assertEquals("$3.00", node.getMoney());
-        node = restTemplate.getForObject("http://localhost:" + port + "/balance", MoneyResponse.class);
-        assertEquals("$0.00", node.getBalance());
+
+        assertEquals("$3.00", makeCall("/balance").at("/balance").asText());
+        assertEquals("$3.00", makeCall("/cancel").at("/money").asText());
+        assertEquals("$0.00", makeCall("/balance").at("/balance").asText());
+
 
     }
 
     @Test
     void testBuyACrunchBar() {
         insertThreeDollars();
-        DispenseResponse node = restTemplate.getForObject("http://localhost:" + port + "/dispense?loc=A2", DispenseResponse.class);
+        JsonNode rslt = makeCall("/dispense?loc=A2");
 
-        assertEquals("Crunch", node.getItem().getName());
-        assertEquals("$0.50", node.getMoney());
+        assertEquals("Crunch", rslt.at("/item/name").asText());
+        assertEquals("$0.50", rslt.at("/money").asText());
 
     }
 
     @Test
     void testCheckItem() {
-        JsonNode node = restTemplate.getForObject("http://localhost:" + port + "/checkItem?loc=E2", JsonNode.class);
-        assertEquals("Kit Kat", node.at("/data/item/name").asText());
+        JsonNode rslt = makeCall("/checkItem?loc=E2");
+        assertEquals("Kit Kat", rslt.at("/data/item/name").asText());
 
     }
 
     private void insertThreeDollars() {
-        MoneyResponse node = restTemplate.getForObject("http://localhost:" + port + "/insertMoney?c=USD&v=1", MoneyResponse.class);
-        node = restTemplate.getForObject("http://localhost:" + port + "/insertMoney?c=USD&v=1", MoneyResponse.class);
-        node = restTemplate.getForObject("http://localhost:" + port + "/insertMoney?c=USD&v=1", MoneyResponse.class);
 
-        assertEquals("$1.00", node.getMoney());
-        assertEquals("$3.00", node.getBalance());
+        makeCall("/insertMoney?c=USD&v=1");
+        makeCall("/insertMoney?c=USD&v=1");
+        JsonNode rslt = makeCall("/insertMoney?c=USD&v=1");
+
+
+        assertEquals("$1.00", rslt.at("/money").asText());
+        assertEquals("$3.00", rslt.at("/balance").asText());
 
     }
-
-    ///////////// Bunch of fake pojos to make the assertions above easier
-
-
-    @Getter
-    public static class DispenseResponse {
-
-        private Item item;
-        private String location;
-        private String money;
-    }
-
-    @Getter
-    public static class MoneyResponse {
-
-        private String balance;
-        private String money;
-    }
-
-    @Getter
-    public static class InventoryResponse {
-
-        private List<InventoryItem> data;
-
-        @Getter
-
-        public static class InventoryItem {
-
-            private String location;
-            private Integer quantity;
-            private Item item;
-
-            @Getter
-
-            public static class Item {
-
-                private String name;
-                private String price;
-                @JsonProperty("SKU")
-                private Integer sku;
-
-            }
-        }
-    }
-
 }
